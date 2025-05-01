@@ -47,6 +47,7 @@
       text-align: center;
       transition: background 0.2s;
       font-size: 1.2em;
+      cursor: pointer;
     }
 
     .link-box:hover {
@@ -115,6 +116,7 @@
     <div class="title">Google Docs</div>
   </div>
 
+  <!-- Password Login -->
   <div class="login" id="loginBox">
     <h2>Sign in to access this document</h2>
     <input type="password" id="password" placeholder="Enter password">
@@ -123,6 +125,7 @@
     <div class="error" id="errorMsg"></div>
   </div>
 
+  <!-- Regular Game Hub -->
   <div class="container" id="gameHub">
     <div class="link-box" onclick="loadIframe('https://hahagames.com')">
       <a href="javascript:void(0);">Haha Games</a>
@@ -133,47 +136,58 @@
     <div class="link-box" onclick="loadIframe('https://orteil.dashnet.org')">
       <a href="javascript:void(0);">Cookie Clicker</a>
     </div>
-    <!-- Open the specified website in a blank tab without redirecting -->
-    <div class="link-box" onclick="openBlankTab('https://bush-invited-traffic.glitch.me')">
-      <a href="javascript:void(0);">Open Blank Tab - Bush Invited Traffic</a>
-    </div>
-
-    <div class="iframe-container" id="iframeContainer">
+    <div class="iframe-container">
       <iframe id="iframe" src=""></iframe>
+    </div>
+  </div>
+
+  <!-- Developer Hub -->
+  <div class="container" id="devHub">
+    <div class="link-box" onclick="openBlankTab('https://hahagames.com')">
+      <a href="javascript:void(0);">Open Haha Games (New Tab)</a>
+    </div>
+    <div class="link-box" onclick="openBlankTab('https://quiz-50.guru')">
+      <a href="javascript:void(0);">Open Quiz-50.Guru (New Tab)</a>
+    </div>
+    <div class="link-box" onclick="openBlankTab('https://orteil.dashnet.org')">
+      <a href="javascript:void(0);">Open Cookie Clicker (New Tab)</a>
+    </div>
+    <div class="link-box" onclick="openBlankTab('https://bush-invited-traffic.glitch.me')">
+      <a href="javascript:void(0);">Open Bush Invited Traffic (New Tab)</a>
     </div>
   </div>
 
   <script>
     function checkPassword() {
-      const correctPassword = "THEBESTSITE";
-      const userInput = document.getElementById("password").value;
+      const password = document.getElementById("password").value;
       const errorMsg = document.getElementById("errorMsg");
+      const loginBox = document.getElementById("loginBox");
+      const gameHub = document.getElementById("gameHub");
+      const devHub = document.getElementById("devHub");
 
-      if (userInput === correctPassword) {
-        document.getElementById("loginBox").style.display = "none";
-        document.getElementById("gameHub").style.display = "block";
+      if (password === "THEBESTSITE") {
+        loginBox.style.display = "none";
+        gameHub.style.display = "block";
+      } else if (password === "Dev-mode") {
+        loginBox.style.display = "none";
+        devHub.style.display = "block";
       } else {
         errorMsg.textContent = "Incorrect password. Try again.";
       }
     }
 
     function loadIframe(url) {
-      const iframe = document.getElementById("iframe");
-      iframe.src = url;
+      document.getElementById("iframe").src = url;
     }
 
-    // Function to open a blank tab and load content inside an iframe
     function openBlankTab(url) {
       const newWindow = window.open('about:blank', '_blank');
       if (newWindow) {
         newWindow.document.write(`
           <html>
             <head>
-              <title>Blank Tab</title>
-              <style>
-                body { margin: 0; padding: 0; }
-                iframe { width: 100%; height: 100vh; border: none; }
-              </style>
+              <title>Loading...</title>
+              <style>body{margin:0}iframe{width:100vw;height:100vh;border:none;}</style>
             </head>
             <body>
               <iframe src="${url}"></iframe>
@@ -182,7 +196,7 @@
         `);
         newWindow.document.close();
       } else {
-        alert('Popup blocked! Please allow popups for this site.');
+        alert("Popup blocked! Please allow popups for this site.");
       }
     }
   </script>
