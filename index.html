@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Google Docs</title>
+  <link rel="icon" href="https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_document_x16.png">
+  <style>
+    body {
+      background-color: #f1f3f4;
+      font-family: Arial, sans-serif;
+      color: #202124;
+      margin: 0;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .logo {
+      width: 40px;
+      margin-right: 10px;
+    }
+
+    .title {
+      font-size: 1.5em;
+      font-weight: 500;
+    }
+
+    .container {
+      max-width: 1000px; /* Increased width */
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      display: none;
+    }
+
+    .link-box {
+      padding: 20px;
+      margin: 15px 0;
+      background-color: #e8f0fe;
+      border-radius: 6px;
+      text-align: center;
+      transition: background 0.2s;
+      font-size: 1.2em; /* Increased font size for the links */
+    }
+
+    .link-box:hover {
+      background-color: #d2e3fc;
+    }
+
+    a {
+      text-decoration: none;
+      color: #1a73e8;
+      font-weight: bold;
+    }
+
+    .login {
+      max-width: 400px;
+      margin: 100px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+
+    input[type="password"] {
+      padding: 10px;
+      width: 80%;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #1a73e8;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+
+    /* Larger iframe container */
+    .iframe-container {
+      height: 800px;  /* Increased height */
+      width: 100%;    /* Full width of the screen */
+      border: 1px solid #ccc;
+      margin-top: 20px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <img src="https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_document_x16.png" class="logo">
+    <div class="title">Google Docs</div>
+  </div>
+
+  <!-- Password Login -->
+  <div class="login" id="loginBox">
+    <h2>Sign in to access this document</h2>
+    <input type="password" id="password" placeholder="Enter password">
+    <br>
+    <button onclick="checkPassword()">Access</button>
+    <div class="error" id="errorMsg"></div>
+  </div>
+
+  <!-- Hidden Game Hub -->
+  <div class="container" id="gameHub">
+    <div class="link-box" onclick="loadIframe('https://hahagames.com')">
+      <a href="javascript:void(0);">Haha Games</a>
+    </div>
+    <div class="link-box" onclick="loadIframe('https://quiz-50.guru')">
+      <a href="javascript:void(0);">Quiz-50.Guru</a>
+    </div>
+    <div class="link-box" onclick="loadIframe('https://orteil.dashnet.org')">
+      <a href="javascript:void(0);">Cookie Clicker</a>
+    </div>
+
+    <!-- Larger Iframe to display websites inside the page -->
+    <div class="iframe-container" id="iframeContainer">
+      <!-- Initially empty, will load content dynamically -->
+      <iframe id="iframe" src=""></iframe>
+    </div>
+  </div>
+
+  <script>
+    function checkPassword() {
+      const correctPassword = "THEBESTSITE";
+      const userInput = document.getElementById("password").value;
+      const errorMsg = document.getElementById("errorMsg");
+
+      if (userInput === correctPassword) {
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("gameHub").style.display = "block";
+      } else {
+        errorMsg.textContent = "Incorrect password. Try again.";
+      }
+    }
+
+    // Function to load the iframe with the selected URL
+    function loadIframe(url) {
+      const iframe = document.getElementById("iframe");
+      iframe.src = url; // Set iframe source to the clicked website URL
+    }
+  </script>
+
+</body>
+</html>
