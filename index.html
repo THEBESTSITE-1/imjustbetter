@@ -30,7 +30,7 @@
     }
 
     .container {
-      max-width: 1000px; /* Increased width */
+      max-width: 1000px;
       margin: 40px auto;
       background: white;
       padding: 30px;
@@ -46,7 +46,7 @@
       border-radius: 6px;
       text-align: center;
       transition: background 0.2s;
-      font-size: 1.2em; /* Increased font size for the links */
+      font-size: 1.2em;
     }
 
     .link-box:hover {
@@ -94,10 +94,9 @@
       margin-top: 10px;
     }
 
-    /* Larger iframe container */
     .iframe-container {
-      height: 800px;  /* Increased height */
-      width: 100%;    /* Full width of the screen */
+      height: 800px;
+      width: 100%;
       border: 1px solid #ccc;
       margin-top: 20px;
     }
@@ -116,7 +115,6 @@
     <div class="title">Google Docs</div>
   </div>
 
-  <!-- Password Login -->
   <div class="login" id="loginBox">
     <h2>Sign in to access this document</h2>
     <input type="password" id="password" placeholder="Enter password">
@@ -125,7 +123,6 @@
     <div class="error" id="errorMsg"></div>
   </div>
 
-  <!-- Hidden Game Hub -->
   <div class="container" id="gameHub">
     <div class="link-box" onclick="loadIframe('https://hahagames.com')">
       <a href="javascript:void(0);">Haha Games</a>
@@ -136,10 +133,12 @@
     <div class="link-box" onclick="loadIframe('https://orteil.dashnet.org')">
       <a href="javascript:void(0);">Cookie Clicker</a>
     </div>
+    <!-- Open the specified website in a blank tab without redirecting -->
+    <div class="link-box" onclick="openBlankTab('https://bush-invited-traffic.glitch.me')">
+      <a href="javascript:void(0);">Open Blank Tab - Bush Invited Traffic</a>
+    </div>
 
-    <!-- Larger Iframe to display websites inside the page -->
     <div class="iframe-container" id="iframeContainer">
-      <!-- Initially empty, will load content dynamically -->
       <iframe id="iframe" src=""></iframe>
     </div>
   </div>
@@ -158,10 +157,33 @@
       }
     }
 
-    // Function to load the iframe with the selected URL
     function loadIframe(url) {
       const iframe = document.getElementById("iframe");
-      iframe.src = url; // Set iframe source to the clicked website URL
+      iframe.src = url;
+    }
+
+    // Function to open a blank tab and load content inside an iframe
+    function openBlankTab(url) {
+      const newWindow = window.open('about:blank', '_blank');
+      if (newWindow) {
+        newWindow.document.write(`
+          <html>
+            <head>
+              <title>Blank Tab</title>
+              <style>
+                body { margin: 0; padding: 0; }
+                iframe { width: 100%; height: 100vh; border: none; }
+              </style>
+            </head>
+            <body>
+              <iframe src="${url}"></iframe>
+            </body>
+          </html>
+        `);
+        newWindow.document.close();
+      } else {
+        alert('Popup blocked! Please allow popups for this site.');
+      }
     }
   </script>
 
